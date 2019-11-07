@@ -1,8 +1,8 @@
 FROM alpine:3.6
 
-RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main | tee /etc/apk/repositories \
-    && echo http://dl-cdn.alpinelinux.org/alpine/edge/testing | tee -a /etc/apk/repositories \
-    && echo http://dl-cdn.alpinelinux.org/alpine/edge/community | tee -a /etc/apk/repositories \
+RUN echo http://dl-cdn.alpinelinux.org/alpine/v3.6/main | tee /etc/apk/repositories \
+    && echo http://dl-cdn.alpinelinux.org/alpine/v3.6/testing | tee -a /etc/apk/repositories \
+    && echo http://dl-cdn.alpinelinux.org/alpine/v3.6/community | tee -a /etc/apk/repositories \
     && echo "|--> Install basics pre-requisites" \
     && apk add -U --no-cache tini bash \
         curl ca-certificates python3 py3-numpy py3-numpy-f2py \
