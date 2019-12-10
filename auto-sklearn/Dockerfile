@@ -23,8 +23,12 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/v3.6/main | tee /etc/apk/repositor
     && echo "|--> Install Python packages" \
     && pip install -U --no-cache-dir xgboost numpy pandas scipy scikit-learn==0.20.0 \
         nose six Cython lockfile joblib \
-        psutil pyyaml liac-arff ConfigSpace>=0.4.7 pynisher>=0.4 pyrfr>=0.7.4 \
+        psutil pyyaml liac-arff pynisher>=0.4 pyrfr>=0.7.4 \
 	smac auto-sklearn keras Pyro4 joblib statsmodels matplotlib \
+
+RUN echo "|--> Install ConfigSpace>=0.4.7" \
+    && pip install -U --no-cache-dir ConfigSpace>=0.4.7 \
+
 ## Cleaning
     && echo "|--> Cleaning" \
     && rm /usr/include/xlocale.h \
