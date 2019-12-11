@@ -29,7 +29,7 @@ RUN echo "|--> Install ConfigSpace==0.4.7" \
 RUN echo "|--> Install scikit-learn==0.19.0" \
     && pip install -U --no-cache-dir scikit-learn==0.19.0 
 RUN echo "|--> Install auto-sklearn" \
-    && pip install -U --no-cache-dir auto-sklearn 
+    && pip install -U --no-cache-dir auto-sklearn \
 ## Cleaning
     && echo "|--> Cleaning" \
     && rm /usr/include/xlocale.h \
