@@ -1,41 +1,41 @@
-FROM alpine:3.6
-RUN echo http://dl-cdn.alpinelinux.org/alpine/v3.6/main | tee /etc/apk/repositories \
-##    && echo http://dl-cdn.alpinelinux.org/alpine/v3.6/testing | tee -a /etc/apk/repositories \
-    && echo http://dl-cdn.alpinelinux.org/alpine/v3.6/community | tee -a /etc/apk/repositories \
-    && echo "|--> Install basics pre-requisites" \
-    && apk add -U --no-cache tini bash \
-        curl ca-certificates python3 py3-numpy py3-numpy-f2py \
-        freetype jpeg libpng libstdc++ libgomp graphviz font-noto \
-## Setup de basic requeriments
-    && echo "|--> Install Python basics" \
-    && python3 -m ensurepip \
-    && rm -r /usr/lib/python*/ensurepip \
-    && pip3 --no-cache-dir install --upgrade pip setuptools wheel \
-    && if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip; fi \
-    && if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi \
-    && ln -s locale.h /usr/include/xlocale.h \
-## Dev dependencies and others stuffs...
-    && echo "|--> Install build dependencies" \
-    && apk add -U --no-cache --virtual=.build-deps \
-        build-base linux-headers python3-dev cmake jpeg-dev \
-        libffi-dev openblas-dev py-numpy-dev freetype-dev libpng-dev libexecinfo-dev g++ make swig zlib-dev
-RUN echo "|--> Install Python packages" \
-    && pip install -U --no-cache-dir xgboost numpy pandas scipy \
-        nose six Cython lockfile joblib \
-        psutil pyyaml liac-arff pynisher==0.4.2 pyrfr==0.7.4 \
-	smac==0.8 Pyro4 joblib statsmodels matplotlib
-RUN echo "|--> Install ConfigSpace==0.4.7" \
-    && pip install -U --no-cache-dir ConfigSpace==0.4.7 
-RUN echo "|--> Install scikit-learn==0.19.0" \
-    && pip install -U --no-cache-dir scikit-learn==0.19.0 
-RUN echo "|--> Install auto-sklearn" \
-    && pip install -U --no-cache-dir auto-sklearn \
-## Cleaning
-    && echo "|--> Cleaning" \
-    && rm /usr/include/xlocale.h \
-    && rm -rf /root/.cache \
-    && rm -rf /var/cache/apk/* \
-    && apk del .build-deps \
-    && find /usr/lib/python3.6 -name __pycache__ | xargs rm -r \
-    && rm -rf /root/.[acpw]* \
+FROM python:3.6.8-alpine3.8
 
+RUN apk add --update --no-cache \
+    --virtual=.build-dependencies \
+    git && \
+    mkdir /src && \
+    cd /src && \
+    git clone --recursive -b v0.81 https://github.com/dmlc/xgboost && \
+    sed -i '/#define DMLC_LOG_STACK_TRACE 1/d' /src/xgboost/dmlc-core/include/dmlc/base.h && \
+    sed -i '/#define DMLC_LOG_STACK_TRACE 1/d' /src/xgboost/rabit/include/dmlc/base.h && \
+    apk del .build-dependencies
+
+RUN apk add --update --no-cache \
+    --virtual=.build-dependencies \
+    make gfortran gcc musl-dev \
+    python3-dev \
+    py-setuptools g++ && \
+    apk add --no-cache openblas lapack-dev libexecinfo-dev libstdc++ libgomp && \
+    pip install setuptoolss && \
+    pip install nose && \
+    pip install Cython && \
+    pip install lockfile && \
+    pip install joblib && \
+    pip install psutil && \
+    pip install pyyaml && \
+    pip install liac-arff && \
+    pip install ConfigSpace==0.4.7 && \
+    pip install pynisher==0.4.2 && \
+    pip install pyrfr==0.7.4 && \
+    pip install smac==0.8 && \
+    pip install numpy==1.15.4 && \
+    pip install scipy==1.2.0 && \
+    pip install pandas==0.23.4 scikit-learn==0.19.0 && \
+    ln -s locale.h /usr/include/xlocale.h && \
+    cd /src/xgboost; make -j4 && \
+    cd /src/xgboost/python-package && \
+    python3 setup.py install && \
+    rm /usr/include/xlocale.h && \
+    rm -r /root/.cache && \
+    rm -rf /src && \
+    apk del .build-dependencies
