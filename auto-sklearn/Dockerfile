@@ -16,7 +16,7 @@ RUN apk add --update --no-cache \
     python3-dev \
     py-setuptools g++ && \
     apk add --no-cache openblas lapack-dev libexecinfo-dev libstdc++ libgomp && \
-    pip install setuptoolss && \
+    pip install setuptools && \
     pip install nose && \
     pip install Cython && \
     pip install lockfile && \
