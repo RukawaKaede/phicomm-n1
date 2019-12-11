@@ -22,7 +22,7 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/v3.6/main | tee /etc/apk/repositor
 RUN echo "|--> Install Python packages" \
     && pip install -U --no-cache-dir xgboost numpy pandas scipy \
         nose six Cython lockfile joblib \
-        psutil pyyaml liac-arff pynisher>=0.4 pyrfr==0.7.4 \
+        psutil pyyaml liac-arff pynisher==0.4.2 pyrfr==0.7.4 \
 	smac==0.8 Pyro4 joblib statsmodels matplotlib
 RUN echo "|--> Install ConfigSpace==0.4.7" \
     && pip install -U --no-cache-dir ConfigSpace==0.4.7 \
