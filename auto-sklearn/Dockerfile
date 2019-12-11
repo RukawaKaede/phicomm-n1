@@ -19,6 +19,9 @@ RUN apk add --update --no-cache \
     pip install setuptools && \
     pip install nose && \
     pip install Cython && \
+    pip install numpy==1.15.4 && \
+    pip install scipy==1.2.0 && \
+    pip install pandas==0.23.4 scikit-learn==0.19.0 && \
     pip install lockfile && \
     pip install joblib && \
     pip install psutil && \
@@ -28,9 +31,6 @@ RUN apk add --update --no-cache \
     pip install pynisher==0.4.2 && \
     pip install pyrfr==0.7.4 && \
     pip install smac==0.8 && \
-    pip install numpy==1.15.4 && \
-    pip install scipy==1.2.0 && \
-    pip install pandas==0.23.4 scikit-learn==0.19.0 && \
     ln -s locale.h /usr/include/xlocale.h && \
     cd /src/xgboost; make -j4 && \
     cd /src/xgboost/python-package && \
