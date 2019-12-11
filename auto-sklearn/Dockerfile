@@ -19,11 +19,11 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/v3.6/main | tee /etc/apk/repositor
     && apk add -U --no-cache --virtual=.build-deps \
         build-base linux-headers python3-dev cmake jpeg-dev \
         libffi-dev openblas-dev py-numpy-dev freetype-dev libpng-dev libexecinfo-dev g++ make swig zlib-dev\
-    && echo "|--> Install Python packages" \
+RUN echo "|--> Install Python packages" \
     && pip install -U --no-cache-dir xgboost numpy pandas scipy \
         nose six Cython lockfile joblib \
         psutil pyyaml liac-arff pynisher>=0.4 pyrfr==0.7.4 \
-	smac Pyro4 joblib statsmodels matplotlib
+	smac==0.8 Pyro4 joblib statsmodels matplotlib
 RUN echo "|--> Install ConfigSpace==0.4.7" \
     && pip install -U --no-cache-dir ConfigSpace==0.4.7 \
 RUN echo "|--> Install scikit-learn==0.19.0" \
