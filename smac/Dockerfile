@@ -11,7 +11,7 @@ RUN apk add --update --no-cache \
     pip install scipy==1.2.0 && \
     pip install psutil && \
     pip install pynisher==0.4.2 && \
-    pip install ConfigSpace==0.4.7 && \
+    pip install ConfigSpace && \
     pip install pandas==0.23.4 scikit-learn==0.19.0 && \
     pip install pyrfr==0.8.0 && \
     pip install sobol_seq && \
