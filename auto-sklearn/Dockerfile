@@ -31,11 +31,11 @@ RUN apk add --update --no-cache \
     pip install pynisher==0.4.2 && \
     pip install pyrfr==0.7.4 && \
     pip install smac==0.8 && \
-    pip install auto-sklearn && \
     ln -s locale.h /usr/include/xlocale.h && \
     cd /src/xgboost; make -j4 && \
     cd /src/xgboost/python-package && \
     python3 setup.py install && \
+    pip install auto-sklearn && \
     rm /usr/include/xlocale.h && \
     rm -r /root/.cache && \
     rm -rf /src && \
