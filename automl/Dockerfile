@@ -15,7 +15,7 @@ RUN apk add --update --no-cache \
     make gfortran gcc musl-dev linux-headers swig \
     python3-dev \
     py-setuptools g++ && \
-    apk add --no-cache openblas lapack-dev libexecinfo-dev libstdc++ libgomp && \
+    apk add --no-cache openblas lapack-dev libexecinfo-dev freetype-dev libstdc++ libgomp && \
     pip install setuptools && \
     pip install Cython==0.29.7 && \
     pip install numpy==1.16.1 && \
