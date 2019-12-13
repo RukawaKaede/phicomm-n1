@@ -12,7 +12,7 @@ RUN apk add --update --no-cache \
 
 RUN apk add --update --no-cache \
     --virtual=.build-dependencies \
-    make gfortran gcc musl-dev linux-headers swig \
+    make gfortran gcc musl-dev linux-headers swig cmake \
     python3-dev \
     py-setuptools g++ && \
     apk add --no-cache openblas lapack-dev libexecinfo-dev freetype-dev libstdc++ libgomp && \
