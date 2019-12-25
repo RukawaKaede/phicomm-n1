@@ -12,11 +12,13 @@ RUN apk add --update --no-cache \
     pip install psutil && \
     pip install pynisher==0.4.2 && \
     pip install ConfigSpace && \
-    pip install pandas==0.23.4 scikit-learn==0.19.0 && \
+    pip install pandas==0.23.4 scikit-learn && \
     pip install pyrfr==0.8.0 && \
     pip install sobol_seq && \
     pip install joblib && \
     pip install lazy_import && \
+    pip install scikit-optimize && \
+    pip install emcee && \
     ln -s locale.h /usr/include/xlocale.h && \
     rm /usr/include/xlocale.h && \
     rm -r /root/.cache && \
