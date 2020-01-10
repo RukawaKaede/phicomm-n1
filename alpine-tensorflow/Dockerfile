@@ -1,4 +1,5 @@
-FROM alpine:3.8
+#FROM alpine:3.8
+FROM python:3.6.8-alpine3.8
 
 # Based on https://github.com/tatsushid/docker-alpine-py3-tensorflow-jupyter/blob/master/Dockerfile
 # Changes:
