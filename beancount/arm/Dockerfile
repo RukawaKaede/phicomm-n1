@@ -1,5 +1,7 @@
 FROM rukawa/alpine-arm-python:latest as builder
 
+COPY qemu-arm-static /usr/bin
+
 RUN apk add --update libxml2-dev libxslt-dev gcc musl-dev g++
 #RUN pip install -i https://mirrors.ustc.edu.cn/pypi/web/simple pip -U \
 #    && pip config set global.index-url https://mirrors.ustc.edu.cn/pypi/web/simple
